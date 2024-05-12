@@ -1,0 +1,59 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void display(Node* current) {
+    while (current != NULL) {
+        cout << current->data << endl;
+        current = current->next;
+    }
+}
+
+void insertLast(Node* cur, int info) {
+    Node* newNode = new Node;
+    newNode->data = info;
+    newNode->next = NULL;
+
+    if (cur == NULL) {
+        cur = newNode;
+    } else {
+        while (cur->next != NULL) {
+            cur = cur->next;
+        }
+        cur->next = newNode;
+    }
+}
+
+int main() {
+    Node* head = new Node;
+    cout << "Enter the data for element 1: ";
+    cin >> head->data;
+    head->next = NULL;
+    Node* current = head;
+
+    for (int i = 1; i < 5; i++) {
+        Node* newNode = new Node;
+        cout << "Enter the data for element " << i + 1 << ": ";
+        cin >> newNode->data;
+        newNode->next = NULL;
+        current->next = newNode;
+        current = current->next;
+    }
+
+    cout << "Linked List elements: " << endl;
+    display(head);
+
+    // Insert a node at the end
+    int data;
+    cout << "Enter the data to insert at the end: ";
+    cin >> data;
+    insertLast(head, data);
+    cout << "Updated Linked List elements: " << endl;
+    display(head);
+
+    return 0;
+}
